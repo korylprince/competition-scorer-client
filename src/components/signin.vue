@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import store from "../js/store.js"
 import {mapState, mapGetters} from "vuex"
 export default {
     name: "app-signin",
@@ -80,6 +81,13 @@ export default {
                 // ignore other errors
             })
         }
+    },
+    beforeRouteEnter(to, from, next) {
+        if (store.getters.signed_in) {
+            next({name: "view"})
+            return
+        }
+        next()
     },
     mounted() {
         this.$refs.username.$el.focus()
