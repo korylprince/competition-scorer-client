@@ -22,8 +22,9 @@ const api = {
         return store.getters.$http.put(API_BASE + "/competition", {competition, id})
     },
     subscribe_competition() {
-        // TODO: is there a better way to do this?
-        return new WebSocket(API_BASE.replace("http://", "ws://") + "/competition/subscribe")
+        var url = new URL(API_BASE, document.location)
+        url.protocol = "ws:"
+        return new WebSocket(url.href + "/competition/subscribe")
     },
     list_revisions() {
         return store.getters.$http.get(API_BASE + "/competition/revisions")
