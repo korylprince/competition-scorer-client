@@ -6,6 +6,11 @@
 
         <md-card-content>
             <md-list>
+                <md-list-item :to="{name: 'edit'}" >
+                    <md-icon>edit</md-icon>
+                    <span class="md-list-item-text">Current Revision</span>
+                </md-list-item>
+
                 <md-list-item
                     v-for="(revision, idx) in sortedRevisions"
                     :key="idx"
