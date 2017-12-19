@@ -189,7 +189,7 @@ export default {
             return !(JSON.stringify(this.competition) === JSON.stringify(this.competition_master))
         },
         ...mapState({competition_master: "competition", external_edit: "external_edit"}),
-        ...mapGetters(["is_loading"])
+        ...mapGetters(["is_loading", "signed_in"])
     },
     watch: {
         competition_master(newCompetition, oldCompetition) {
@@ -282,7 +282,7 @@ export default {
         }
     },
     beforeRouteLeave(to, from, next) {
-        if (this.dirty) {
+        if (this.dirty && this.signed_in) {
             this._next = next
             this.showLeaveDialog = true
             return

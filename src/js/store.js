@@ -46,7 +46,10 @@ const store = new Vuex.Store({
         show_snackbar(state) {
             return state.last_feedback != null
         },
-        $http(state) {
+        $http(state, getters) {
+            if (!getters.signed_in) {
+                return null
+            }
             return axios.create({
                 headers: {Authorization: "SESSION id=" + state.session_id}
             })
